@@ -174,7 +174,7 @@ It is recomended to only apply logging on iron-grid one at a time. If not, you w
 @homepage http://the5heep.tk/
 -->
 <dom-module id="iron-grid">
-  <template>
+    <template>
     <style>
       :host {
       
@@ -2361,181 +2361,181 @@ It is recomended to only apply logging on iron-grid one at a time. If not, you w
       }
     </style>
 
-    <content></content>
+    <slot></slot>
   </template>
 
-  <script>
-    (function() {
-      'use strict';
+    <script>
+        (function() {
+            'use strict';
 
-      Polymer({
-        is: 'iron-grid',
+            Polymer({
+                is: 'iron-grid',
 
-        behaviors: [
-          Polymer.IronResizableBehavior
-        ],
+                behaviors: [
+                    Polymer.IronResizableBehavior
+                ],
 
-        listeners: {
-          'iron-resize': 'onResize'
-        },
+                listeners: {
+                    'iron-resize': 'onResize'
+                },
 
-        properties: {
-          log: {
-            type: Boolean,
-            value: false
-          },
+                properties: {
+                    log: {
+                        type: Boolean,
+                        value: false
+                    },
 
-          xsMaxWidth: {
-            type: Number,
-            value: 480,
-            reflectToAttribute: true
-          },
+                    xsMaxWidth: {
+                        type: Number,
+                        value: 480,
+                        reflectToAttribute: true
+                    },
 
-          sMaxWidth: {
-            type: Number,
-            value: 960,
-            reflectToAttribute: true
-          },
+                    sMaxWidth: {
+                        type: Number,
+                        value: 960,
+                        reflectToAttribute: true
+                    },
 
-          mMaxWidth: {
-            type: Number,
-            value: 1280,
-            reflectToAttribute: true
-          },
+                    mMaxWidth: {
+                        type: Number,
+                        value: 1280,
+                        reflectToAttribute: true
+                    },
 
-          lMaxWidth: {
-            type: Number,
-            value: 1600,
-            reflectToAttribute: true
-          },
+                    lMaxWidth: {
+                        type: Number,
+                        value: 1600,
+                        reflectToAttribute: true
+                    },
 
-          ratios: {
-            type: Array,
-            value: function() {
-              return [8.33333, 16.66667, 25, 33.33333, 41.66667, 50, 58.33333, 66.66667, 75, 83.33333, 91.66667, 100];
-            }
-          },
+                    ratios: {
+                        type: Array,
+                        value: function() {
+                            return [8.33333, 16.66667, 25, 33.33333, 41.66667, 50, 58.33333, 66.66667, 75, 83.33333, 91.66667, 100];
+                        }
+                    },
 
-          screenFormats: {
-            type: Array,
-            value: function() {
-              return ["xs", "s", "m", "l", "xl"];
-            }
-          },
+                    screenFormats: {
+                        type: Array,
+                        value: function() {
+                            return ["xs", "s", "m", "l", "xl"];
+                        }
+                    },
 
-          sizes: {
-            type: Array,
-            value: function() {
-              return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-            }
-          },
+                    sizes: {
+                        type: Array,
+                        value: function() {
+                            return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                        }
+                    },
 
-          prefixs: {
-            type: Array,
-            value: function() {
-              return ["", "offset-", "order-"];
-            }
-          },
+                    prefixs: {
+                        type: Array,
+                        value: function() {
+                            return ["", "offset-", "order-"];
+                        }
+                    },
 
-          currentScreenformat: {
-            type: String,
-            notify: true
-          }
-        },
+                    currentScreenformat: {
+                        type: String,
+                        notify: true
+                    }
+                },
 
-        applyResponsive: function(oldScreenformat, newScreenformat) {
-          if (oldScreenformat) {
-            this.applyPriorities([oldScreenformat], this.sizes, this.prefixs, false);
-          }
-
-          this.applyPriorities([newScreenformat], this.sizes, this.prefixs, true);
-        },
-
-        applyPriorities: function(mFormats, mSizes, mPrefixs, bool) {
-          for (var i = 0; i < mFormats.length; i++) {
-            var format = mFormats[i];
-
-            for (var j = 0; j < mSizes.length; j++) {
-              var size = mSizes[j];
-
-              for (var k = 0; k < mPrefixs.length; k++) {
-                var prefix = mPrefixs[k];
-
-                var myClass = this.constructClass(format, size, prefix, "");
-                var selector = "." + myClass;
-
-                var elements = Polymer.dom(this).querySelectorAll(selector);
-                var myClassImportant = myClass + "-important";
-
-                for (var l = 0; l < elements.length; l++) {
-
-                  if (this.log) {
-                    var action;
-
-                    if (bool) {
-                      action = "Apply";
-                    } else {
-                      action = "Remove";
+                applyResponsive: function(oldScreenformat, newScreenformat) {
+                    if (oldScreenformat) {
+                        this.applyPriorities([oldScreenformat], this.sizes, this.prefixs, false);
                     }
 
-                    console.log(action + " class " + myClass);
-                    console.log("on element : ");
-                    console.log(elements[l]);
-                  }
-                  this.toggleClass(myClassImportant, bool, elements[l]);
+                    this.applyPriorities([newScreenformat], this.sizes, this.prefixs, true);
+                },
+
+                applyPriorities: function(mFormats, mSizes, mPrefixs, bool) {
+                    for (var i = 0; i < mFormats.length; i++) {
+                        var format = mFormats[i];
+
+                        for (var j = 0; j < mSizes.length; j++) {
+                            var size = mSizes[j];
+
+                            for (var k = 0; k < mPrefixs.length; k++) {
+                                var prefix = mPrefixs[k];
+
+                                var myClass = this.constructClass(format, size, prefix, "");
+                                var selector = "." + myClass;
+
+                                var elements = Polymer.dom(this).querySelectorAll(selector);
+                                var myClassImportant = myClass + "-important";
+
+                                for (var l = 0; l < elements.length; l++) {
+
+                                    if (this.log) {
+                                        var action;
+
+                                        if (bool) {
+                                            action = "Apply";
+                                        } else {
+                                            action = "Remove";
+                                        }
+
+                                        console.log(action + " class " + myClass);
+                                        console.log("on element : ");
+                                        console.log(elements[l]);
+                                    }
+                                    this.toggleClass(myClassImportant, bool, elements[l]);
+                                }
+                            }
+                        }
+                    }
+                },
+
+                generateSimpleSelector: function(screen, size, prefix, suffix) {
+                    return '.' + this.constructClass(screen, size, prefix, suffix);
+                },
+
+                constructClass: function(screen, size, prefix, suffix) {
+                    return prefix + screen + size + suffix;
+                },
+
+                onResize: function(event) {
+                    var newWidth = this.offsetWidth;
+
+                    if (newWidth == 0) {
+                        newWidth = this.parentNode.clientWidth;
+                    }
+
+                    if (this.log)
+                        console.log('width : ' + newWidth);
+
+                    var screenFormat = this.getScreenFormat(newWidth);
+
+                    if (this.log)
+                        console.log("screenFormat = " + screenFormat);
+
+                    if (screenFormat !== this.currentScreenformat) {
+                        var oldScreenformat = this.currentScreenformat;
+                        this.currentScreenformat = screenFormat;
+
+                        this.applyResponsive(oldScreenformat, this.currentScreenformat);
+                    }
+                },
+
+                getScreenFormat: function(newWidth) {
+                    if (newWidth <= this.xsMaxWidth) {
+                        return "xs";
+                    } else if (newWidth <= this.sMaxWidth) {
+                        return "s";
+                    } else if (newWidth <= this.mMaxWidth) {
+                        return "m";
+                    } else if (newWidth <= this.lMaxWidth) {
+                        return "l";
+                    } else {
+                        return "xl";
+                    }
                 }
-              }
-            }
-          }
-        },
-
-        generateSimpleSelector: function(screen, size, prefix, suffix) {
-          return '.' + this.constructClass(screen, size, prefix, suffix);
-        },
-
-        constructClass: function(screen, size, prefix, suffix) {
-          return prefix + screen + size + suffix;
-        },
-
-        onResize: function(event) {
-          var newWidth = this.offsetWidth;
-          
-          if(newWidth == 0){
-					        newWidth = this.parentNode.clientWidth;
-					     }
-
-          if (this.log)
-            console.log('width : ' + newWidth);
-
-          var screenFormat = this.getScreenFormat(newWidth);
-
-          if (this.log)
-            console.log("screenFormat = " + screenFormat);
-
-          if (screenFormat !== this.currentScreenformat) {
-            var oldScreenformat = this.currentScreenformat;
-            this.currentScreenformat = screenFormat;
-
-            this.applyResponsive(oldScreenformat, this.currentScreenformat);
-          }
-        },
-
-        getScreenFormat: function(newWidth) {
-          if (newWidth <= this.xsMaxWidth) {
-            return "xs";
-          } else if (newWidth <= this.sMaxWidth) {
-            return "s";
-          } else if (newWidth <= this.mMaxWidth) {
-            return "m";
-          } else if (newWidth <= this.lMaxWidth) {
-            return "l";
-          } else {
-            return "xl";
-          }
-        }
-      });
-    })();
-  </script>
+            });
+        })();
+    </script>
 </dom-module>
 
 <!--
@@ -2552,7 +2552,7 @@ Custom property | Description | Default
 `--iron-container-width`|Width of the Container|`90%`
 -->
 <dom-module id="iron-grid-container">
-  <template>
+    <template>
     <style>
       .iron-container {
         padding: 0 1.5rem;
@@ -2568,12 +2568,12 @@ Custom property | Description | Default
     </style>
 
     <div class="iron-container">
-      <content></content>
+      <slot></slot>
     </div>
   </template>
-  <script>
-    Polymer({
-        is: 'iron-grid-container'
-    });
-</script>
+    <script>
+        Polymer({
+            is: 'iron-grid-container'
+        });
+    </script>
 </dom-module>
